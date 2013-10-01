@@ -1,0 +1,9 @@
+{
+  <% if defined? @id %>
+    "successful": true,
+    "group_id": <%= "#{@id}" %>
+  <% else %>
+    "successful": false,
+    "error": <%= @error %>
+  <% end %>
+}
