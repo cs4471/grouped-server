@@ -11,12 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131001183449) do
+ActiveRecord::Schema.define(:version => 20131002201626) do
+
+  create_table "gps_checkins", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.text     "lat"
+    t.text     "lng"
+    t.text     "certainty"
+    t.text     "timestamp"
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "members", :force => true do |t|
+    t.string   "identity"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.text     "status"
+    t.integer  "group_id"
   end
 
 end

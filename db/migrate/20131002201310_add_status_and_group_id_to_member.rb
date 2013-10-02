@@ -1,0 +1,6 @@
+class AddStatusAndGroupIdToMember < ActiveRecord::Migration
+  def change
+    add_column :members, :status, :text
+    add_column :members, :group_id, :integer
+  end
+end
