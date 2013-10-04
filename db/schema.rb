@@ -11,15 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131002201626) do
+ActiveRecord::Schema.define(:version => 20131004011231) do
 
-  create_table "gps_checkins", :force => true do |t|
+  create_table "checkins", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.text     "lat"
     t.text     "lng"
+    t.text     "status"
     t.text     "certainty"
     t.text     "timestamp"
+    t.integer  "member_id"
   end
 
   create_table "groups", :force => true do |t|
@@ -32,7 +34,6 @@ ActiveRecord::Schema.define(:version => 20131002201626) do
     t.string   "identity"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.text     "status"
     t.integer  "group_id"
   end
 

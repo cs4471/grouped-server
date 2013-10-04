@@ -1,2 +1,4 @@
 class MembersController < ApplicationController
+  
+  
 end
