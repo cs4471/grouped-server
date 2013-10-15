@@ -1,10 +1,7 @@
 {
-  <% if defined? @group.id %>
-    "successful": true,
-    "name": "<%= @group.name %>",
+  <% unless defined? @error %>
     "id": <%= @group.id %>
   <% else %>
-    "successful": false,
     "error": <%= @error %>
   <% end %>
 }

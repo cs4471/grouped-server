@@ -1,0 +1,8 @@
+{
+  <% unless defined? @error %>
+    "id": <%= @member.id %>,
+    "group_id": <%= @group.id %>
+  <% else %>
+    "error": <%= @error %>
+  <% end %>
+}

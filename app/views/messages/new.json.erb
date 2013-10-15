@@ -1,0 +1,7 @@
+{
+  <% unless defined? @error %>
+    "id": <%= @message.id %>
+  <% else %>
+    "error": <%= @error %>
+  <% end %>
+}
