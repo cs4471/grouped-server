@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nickname: MyString
+  status: MyString
+  lat: MyString
+  lng: MyString
+  certainty: MyString
+
+two:
+  nickname: MyString
+  status: MyString
+  lat: MyString
+  lng: MyString
+  certainty: MyString

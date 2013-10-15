@@ -11,10 +11,37 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131001183449) do
+ActiveRecord::Schema.define(:version => 20131015185239) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.string   "event"
+    t.string   "length"
+    t.string   "roam"
+    t.integer  "checkin_count", :default => 0
+    t.integer  "message_count", :default => 0
+  end
+
+  create_table "groups_members", :force => true do |t|
+    t.integer "group_id"
+    t.integer "member_id"
+  end
+
+  create_table "members", :force => true do |t|
+    t.string   "nickname"
+    t.string   "status"
+    t.string   "lat"
+    t.string   "lng"
+    t.string   "certainty"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.string   "message"
+    t.integer  "member_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
