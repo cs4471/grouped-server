@@ -1,6 +1,5 @@
 class Member < ActiveRecord::Base
-  attr_accessible :identity
+  attr_accessible :certainty, :lat, :lng, :nickname, :status
   
-  belongs_to :group
-  has_one :checkin
+  has_many :groups
 end
