@@ -31,7 +31,21 @@ class MembersController < ApplicationController
   end
 
   def get
+    @checkins = []
+    if params.has_key?(:group_id)      
+      if @group = Group.find(params[:group_id])
+        @group.members.each do |member|
+          @checkin[:member_id] = member.id
+          @checkin[:nickname] = member.nickname unless member.nickname.nil?
+          @checkin[:status] = member.nickname unless member.nickname.nil?
+           
+          @checkins[] = Array.new
+        end
 
+        
+      end
+    end
+    
   	render "members/get_checkins", formats: [:json]
   end
 
