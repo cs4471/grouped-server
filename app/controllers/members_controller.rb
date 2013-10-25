@@ -20,12 +20,22 @@ class MembersController < ApplicationController
       @error = 1
     end
 
+    @min = Array.new
     # update each groups checkin count
     @member.groups.each do |group|
-      group.checkin_count = group.checkin_count + 1
-      group.save
-      @checkin_id = group.checkin_count
+      if group.member_checkins.empty?
+        @checkin_id = 0
+      else
+        @checkin_id = group.member_checkins.size
+      end
+      # keep track of checkin ids to pick the lowest one later
+      @min.push(@checkin_id)
+      
+      group.member_checkins.create(member_id: @member.id, checkin_id: @checkin_id)
     end
+    
+    # give them the lowest one
+    @checkin_id = @min.min
     
   	render "members/new_checkin", formats: [:json]
   end
@@ -33,17 +43,35 @@ class MembersController < ApplicationController
   def get
     @checkins = Array.new
     if params.has_key?(:group_id)      
+      @checkin_id = -1
+      @checkin_id = params[:checkin_id].to_i if params.has_key?(:checkin_id)
+      
       if @group = Group.find(params[:group_id])
         @group.members.each do |member|
           @checkin = Hash.new
-          @checkin[:id] = @group.checkin_count
+          @checkin[:id] = member.member_checkins.where(group_id: params[:group_id]).first.checkin_id
           @checkin[:member_id] = member.id
-          @checkin[:nickname] = member.nickname
-          @checkin[:status] = member.status
-           
-          @checkins.push(@checkin)
+          @checkin[:nickname] = member.nickname unless member.nickname.nil?
+          @checkin[:status] = member.status unless member.status.nil?
+          
+          unless member.lat.nil? 
+            @checkin[:location] = Hash.new
+            @checkin[:location][:lat] = member.lat
+            @checkin[:location][:lng] = member.lng
+            @checkin[:location][:certainty] = member.certainty
+          end
+          
+          @checkins.push(@checkin) if @checkin[:id] > @checkin_id
         end
+      else
+        
+        # group with provided id does not exist
+        @error = 1
       end
+      
+    else
+      # missing group id!
+      @error = 1
     end
     
   	render "members/get_checkins", formats: [:json]

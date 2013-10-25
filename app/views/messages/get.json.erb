@@ -4,11 +4,11 @@
     	<% @messages.each_with_index do |message, index| %>
     	{
     		"id": <%= message.id %>,
-    		"member_id": <%= message.member_id %>
-    		"message": <%= message.message %>
+    		"member_id": <%= message.member_id %>,
+    		"message": "<%= message.message %>"
     	}
 
-    		<% unless index == @checkins.length - 1 %>
+    		<% unless index == @messages.length - 1 %>
     			,
     		<% end %>
     	<% end %>
