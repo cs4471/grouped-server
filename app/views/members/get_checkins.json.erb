@@ -3,22 +3,22 @@
     "checkins": [
     	<% @checkins.each_with_index do |checkin, index| %>
     	{
-    		"id": <%= checkin.id %>,
-    		"member_id": <%= checkin.member_id %>
+        "id": <%= checkin[:id] %>,
+        "member_id": <%= checkin[:member_id] %>
     		
-    		<% checkin.has_attribute? "nickname" %>
-    			, "nickname": <%= checkin.nickname %>
+        <% if checkin.has_key? :nickname %>
+          , "nickname": "<%= checkin[:nickname] %>"
     		<% end %>
 
-    		<% checkin.has_attribute? "status" %>
-    			, "status": <%= checkin.status %>
+        <% if checkin.has_key? :status %>
+          , "status": "<%= checkin[:status] %>"
     		<% end %>
 
-    		<% checkin.has_attribute? "location" %>
+        <% if checkin.has_key? :location %>
     			, "location":{
-    				"lat": <%= checkin.location.lat %>,
-    				"lng": <%= checkin.location.lng %>,
-    				"certainty": <%= checkin.location.certainty %>
+            "lat": "<%= checkin[:location][:lat] %>",
+            "lng": "<%= checkin[:location][:lng] %>",
+            "certainty": "<%= checkin[:location][:certainty] %>"
     			}
     		<% end %>
     	}
@@ -28,7 +28,6 @@
     		<% end %>
     	<% end %>
     ]
-
   <% else %>
     "error": <%= @error %>
   <% end %>

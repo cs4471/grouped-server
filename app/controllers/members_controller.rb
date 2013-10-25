@@ -31,18 +31,18 @@ class MembersController < ApplicationController
   end
 
   def get
-    @checkins = []
+    @checkins = Array.new
     if params.has_key?(:group_id)      
       if @group = Group.find(params[:group_id])
         @group.members.each do |member|
+          @checkin = Hash.new
+          @checkin[:id] = @group.checkin_count
           @checkin[:member_id] = member.id
-          @checkin[:nickname] = member.nickname unless member.nickname.nil?
-          @checkin[:status] = member.nickname unless member.nickname.nil?
+          @checkin[:nickname] = member.nickname
+          @checkin[:status] = member.status
            
-          @checkins[] = Array.new
+          @checkins.push(@checkin)
         end
-
-        
       end
     end
     
