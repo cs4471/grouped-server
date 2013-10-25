@@ -1,7 +1,6 @@
 class GroupsController < ApplicationController
 
-  def new
-	
+  def new	
     if params.has_key?(:name)
       if params.has_key?(:id)
         # we are just updating a groups info
@@ -48,8 +47,15 @@ class GroupsController < ApplicationController
   end
 
   def delete
-
-	  @error = 1 unless @group = Group.destroy(params[:id])
+    if(params.has_key?(:id))
+      if @group = Group.find(params[:id])
+        @group.destroy
+      else
+        @error = 1         
+      end
+    else 
+      @error = 1
+    end
 
   	render "groups/delete", formats: [:json]
   end
