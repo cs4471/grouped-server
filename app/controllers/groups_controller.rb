@@ -40,7 +40,7 @@ class GroupsController < ApplicationController
       @group.members << @member
     else
       # group id needed
-      @error = 1
+      @error = 2
     end
 
   	render "groups/join", formats: [:json]
@@ -51,10 +51,10 @@ class GroupsController < ApplicationController
       if @group = Group.find(params[:id])
         @group.destroy
       else
-        @error = 1         
+        @error = 3         
       end
     else 
-      @error = 1
+      @error = 2
     end
 
   	render "groups/delete", formats: [:json]

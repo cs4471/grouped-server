@@ -9,16 +9,16 @@ class MessagesController < ApplicationController
           @message = @group.messages.create(member_id: @member.id, message: params[:message])
         else
           # message missing!
-          @error = 1
+          @error = 7
         end
           
       else
-        # invalid member id!
-        @error = 1
+        # Cannot find member with given member id!
+        @error = 5
       end
     else
       # missing the member id!
-      @error = 1
+      @error = 6
     end
 
     render "messages/new", formats: [:json]

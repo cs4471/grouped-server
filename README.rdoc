@@ -35,7 +35,7 @@ if successful :
 }
 else :
 {
-	“error”: INT (ERROR ID #, TO BE DOCUMENTED)
+	“error”: INT (ERROR ID 1 if the group could not be created)
 }
 
 Feature :
@@ -58,7 +58,7 @@ if successful :
 }
 else :
 {
-	“error”: INT (error id #, these will be documented)
+	“error”: INT (error id 2 if the group does not exist and group ID is needed)
 }
 
 Feature :
@@ -79,7 +79,8 @@ if successful :
 }
 else :
 {
-	“error”: INT (error id #, these will be documented)
+	“error”: INT (error id 3 if the group with that ID could not be found. 
+  error id 2 if the group ID does not exist.)
 }
 
 Feature :
@@ -105,7 +106,9 @@ if successful :
 }
 else :
 {
-	“error”: INT (error id #, these will be documented)
+	“error”: INT (error id 4 when there was an error saving the member atrributes. 
+  error ID 5 when the member with the given member ID is not found. 
+  error ID 6 when the given member ID is not found.)
 }
 
 
@@ -141,7 +144,8 @@ if successful :
 }
 else :
 {
-	“error”: INT (error id #, these will be documented)
+	“error”: INT (error id 3 if the group with that ID could not be found. 
+  error id 2 if the group ID does not exist.)
 }
 
 Feature :
@@ -164,7 +168,9 @@ if successful :
 }
 else :
 {
-	“error”: INT (error id #, these will be documented)
+	“error”: INT (error ID 5 when the member with the given member ID is not found. 
+  error ID 6 when the given member ID is not found.
+  error ID 7 when the message with the given member ID is missing.)
 }
 
 Feature :

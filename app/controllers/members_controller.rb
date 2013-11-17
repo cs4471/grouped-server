@@ -10,14 +10,14 @@ class MembersController < ApplicationController
         end
         
         # error saving the member attributes
-        @error = 1 unless @member.save
+        @error = 4 unless @member.save
       else
         # invalid member id!
-        @error = 1
+        @error = 5
       end
     else
       # missing the member id!
-      @error = 1
+      @error = 6
     end
 
     @min = Array.new
@@ -66,12 +66,12 @@ class MembersController < ApplicationController
       else
         
         # group with provided id does not exist
-        @error = 1
+        @error = 3
       end
       
     else
       # missing group id!
-      @error = 1
+      @error = 2
     end
     
   	render "members/get_checkins", formats: [:json]
