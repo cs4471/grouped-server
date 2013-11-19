@@ -49,7 +49,7 @@ class MembersController < ApplicationController
       if @group = Group.find(params[:group_id])
         @group.members.each do |member|
           @checkin = Hash.new
-          @checkin[:id] = member.member_checkins.where(group_id: params[:group_id]).first.checkin_id
+          @checkin[:id] = member.member_checkins.where(group_id: params[:group_id]).first.checkin_id unless member.member_checkins.empty?
           @checkin[:member_id] = member.id
           @checkin[:nickname] = member.nickname unless member.nickname.nil?
           @checkin[:status] = member.status unless member.status.nil?
@@ -61,7 +61,7 @@ class MembersController < ApplicationController
             @checkin[:location][:certainty] = member.certainty
           end
           
-          @checkins.push(@checkin) if @checkin[:id] > @checkin_id
+          @checkins.push(@checkin) if @checkin.has_key? :id and @checkin[:id] > @checkin_id
         end
       else
         
