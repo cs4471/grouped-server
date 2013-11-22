@@ -5,7 +5,7 @@ GroupedServer::Application.routes.draw do
 
   match "groups/new", to: 'groups#new', via: :post
   match "groups/join", to: 'groups#join', via: :post
-  match "groups/delete", to: 'groups#delete', via: :delete
+  match "groups/leave", to: 'groups#leave', via: :post
 
 
   match "checkins/new", to: "members#checkin", via: :post

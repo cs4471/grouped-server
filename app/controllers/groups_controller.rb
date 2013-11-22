@@ -46,10 +46,18 @@ class GroupsController < ApplicationController
   	render "groups/join", formats: [:json]
   end
 
-  def delete
-    if(params.has_key?(:id))
-      if @group = Group.find(params[:id])
-        @group.destroy
+  def leave
+    if(params.has_key?(:member_id) and params.has_key?(:group_id))
+      if true
+        @group = Group.find(params[:group_id])
+        @member = Member.find(params[:member_id])
+        @group.members.delete(@member)
+
+        MemberCheckin.where({member_id: @member.id, group_id: @group.id}).each do |checkin|
+          checkin.destroy
+        end
+        @group.destroy if @group.members.empty?
+
       else
         @error = 1         
       end
@@ -57,7 +65,7 @@ class GroupsController < ApplicationController
       @error = 1
     end
 
-  	render "groups/delete", formats: [:json]
+  	render "groups/leave", formats: [:json]
   end
   
 end

@@ -3,10 +3,9 @@ class MessagesController < ApplicationController
 	def new
     if params.has_key?(:id)      
       if @member = Member.find(params[:id])
-        @group = (params.has_key?(:group_id) ? @member.groups.where(id: params[:group_id]).first : @member.groups.first)
         
         if params.has_key?(:message)
-          @message = @group.messages.create(member_id: @member.id, message: params[:message])
+          @message = @member.messages.create(message: params[:message])
         else
           # message missing!
           @error = 1
@@ -31,10 +30,10 @@ class MessagesController < ApplicationController
       @message_id = params[:message_id].to_i if params.has_key?(:message_id)
       
       if @group = Group.find(params[:group_id])
-        @group.messages.each do |message|
-          @message = message
-                    
-          @messages.push(@message) if @message.id > @message_id
+        @group.members.each do |member|
+          member.messages.each do |message|
+            @messages << message if message.id > @message_id
+          end
         end
       end
     end
